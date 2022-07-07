@@ -1,0 +1,8 @@
+#files to avoid
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+#avoid adding html
+*.html
