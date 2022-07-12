@@ -14,7 +14,9 @@ cestes_names <- gsub(".csv", "", basename(cestes_files), fixed = TRUE)
 
 envir <- read.csv(cestes_files[3])
 
+#create a list  y le aplica la funcion
 data_list <- lapply(cestes_files, read.csv)
+
 names(data_list) <- cestes_names
 
 length(data_list)
@@ -22,7 +24,7 @@ length(data_list)
 # Inspecting data
 head(data_list$envir)
 dim(data_list$envir)
-summary(envir$envir)
+summary(data_list$envir)
 
 # Output 1: summary table ------------------------------------------------------
 
@@ -32,11 +34,15 @@ envir_mean <- apply(envir[, -1], 2, mean)
 envir_sd <- apply(envir[, -1], 2, sd)
 
 # Creating a function in R -----------------------------------------------------
-std <- function(x, round = FALSE, ...) {
-  std <- sd(x) / sqrt(length(x))
-  if (round) std <- round(std, ...)
-  return(std)
+std <- function(x, ro = FALSE, ...) {
+  y <- sd(x) / sqrt(length(x))
+  if (ro==T) {
+    y <- round(std, ...)
+  }
+  return(y)
 }
+
+std_data1 <- std(data1)
 
 std(envir$Clay, round = TRUE, digits = 2)
 
