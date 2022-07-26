@@ -19,8 +19,11 @@ ggplot(covid) +
   geom_line(aes(x = date, y = new_confirmed)) +
   theme_minimal()
 
-covid$new_confirmed[covid$new_confirmed < 0] <- 0
-#covid$new_confirmed[covid$new_confirmed < 0] <- abs(covid$new_confirmed)
+#covid$new_confirmed[covid$new_confirmed < 0] <- 0
+covid$new_confirmed[covid$new_confirmed < 0] <- abs(covid$new_confirmed)
+covid$new_confirmed <- ifelse(covid$new_confirmed < 0,
+                              abs(covid$new_confirmed),
+                              covid$new_confirmed)
 
 ggplot(covid) +
   geom_line(aes(x = date, y = new_confirmed)) +
