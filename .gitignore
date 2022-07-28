@@ -6,3 +6,10 @@
 
 #avoid adding html
 *.html
+
+#all zip files
+*.zip
+
+#IGNORAR RASTERRR, modificar
+data/raster
+data/shapefiles
