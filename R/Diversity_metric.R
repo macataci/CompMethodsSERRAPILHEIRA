@@ -2,7 +2,9 @@
 # loading needed packages
 library(tidyverse)
 library(reshape2)
-
+#install.packages("vegan")
+install.packages("FD")
+library(vegan)
 
 # Reading the data in R ----
 
@@ -56,6 +58,20 @@ for (i in 1:nrow(comm[,-1])){
 comm$AbundantSp <- sp
 
 
+### DIVERSE METRICS PART 2
+Community.A <- c(10, 6, 4, 1)
+Community.B <- c(17, rep(1,7))
+diversity (Community.A, "shannon")
+diversity (Community.B, "shannon")
+diversity (Community.A, "invsimpso")
+diversity (Community.B, "invsimpso")
+renyi.comA <- renyi (Community.A)
+renyi.comB <- renyi (Community.B)
+union <- rbind(renyi.comA, renyi.comB)
+matplot(t(union), type ="l", axes=F)
+box()
+axis(side=2, )
+axis(side=1, labels=c(0, 0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, "Inf" ), at=(1:11))#se intersectan entonces no se sabe
+legend("topright", legend = c("Community A", "Community B"), lty=c(1,2), col=c(1,2))
 
-
-
+renyi.comBHill <- renyi (Community.B, hill=T)
