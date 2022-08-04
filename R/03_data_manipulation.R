@@ -143,7 +143,7 @@ head(comm_sp)
 
 
 
-##-----------------------------ACA DEJE DE PONER ATENCION----------------------
+##-----------------------------ACA I GOT LOST----------------------
 
 # Second, we added the species attribute data to the community table. In the `traits` table, the column that identifies the species is called `Sp`. Before doing the join, we need to change the name to match the name of the column in `comm_sp` which is `TaxCode`.
 names(traits)
