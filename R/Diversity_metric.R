@@ -57,6 +57,10 @@ for (i in 1:nrow(comm[,-1])){
 
 comm$AbundantSp <- sp
 
+#CREATING FUNCTIONS FOR SHANNON AND SIMPSON DIVERSITY IN COMM DATASET
+#Shannon
+
+
 
 ### DIVERSE METRICS PART 2
 Community.A <- c(10, 6, 4, 1)
