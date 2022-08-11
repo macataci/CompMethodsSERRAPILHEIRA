@@ -9,13 +9,17 @@ output:
     df_print: paged
 abstract: |
   it will be worth reading the report
+bibliography: bib_example.bib
+csl: journal-of-ecology.csl
 ---
 
 ```{r setup, include=FALSE}
+
 knitr::opts_chunk$set(echo = FALSE)
-comm <- read.csv("../data/raw_cestes/comm.csv")
-envir <- read.csv("../data/raw_cestes/envir.csv")
-table <- read.csv("../output/02_envir_summary.csv")
+comm <- read.csv("../data/raw/cestes/comm.csv")
+envir <- read.csv("../data/raw/cestes/envir.csv")
+envir_tbl <- read.csv("../output/02_envir_summary.csv")
+
 ```
 
 ## Introdution
@@ -26,10 +30,9 @@ The purpose of this work is just to show you how to make a manuscript using rmar
 
 ## Material and Methods
 
-We used data from CESTES data base to understand a bit more about species and the environment. 
+We used data that is part of the CESTES data base to understand a bit more about species and the environment. The data was colected by de Bélair in 1981 and it was used in the work of [Pavoine 2010](https://doi.org/10.1111/j.1365-2745.2010.01743.x). 
 
-The data represent an ecological community of `r ncol(comm)` species distributed in `r nrow(comm)` sites. At each site, the following measurements were taken: `r paste(names(envir), collapse = ", ")`.
-
+The data represent an ecological plant community in a coastal marsh plain, La Mafragh (Ne Algeria) of `r ncol(comm)` of species distributed in `r nrow(comm)` sites. At each site, the following measurements were taken: `r paste(names(envir), collapse = ", ")`.
 
 
 ## Results
@@ -38,25 +41,34 @@ Variation of environmental variables across sites is something.
 
 
 ```{r table}
-#names(table) <- c("Espécie", "Largura do bico (mm)",
-#                  "Comprimento do bico (mm)", "Comprimento da nadadeira (mm)")
-knitr::kable(tabela, caption = "Table 1. Mean and standard deviation of environmental metrics across sites", "pipe", digits = 2)
+envir_tbl$mean_std <- paste(envir_tbl$mean, envir_tbl$std, sep = " $\\pm$ ")
+knitr::kable(envir_tbl[, c("mean", "mean_std")], 
+             format = "simple",
+             caption = "Table 1. Mean and standard deviation of environmental metrics across sites", 
+             col.names = c("Variable", "Mean (± std)"), 
+             align = c("cc"))
 ```
 
 
 Most species are rare and a few species are very abundant. 
 
 
-```{r sad, fig.cap = "Figure 1. Species abundance distribution in XXX"}
+```{r sad, fig.cap = "Figure 1. Species abundance distribution of a plant community in a coastal marsh plain, La Mafragh (Ne Algeria)", out.width=500}
 knitr::include_graphics("../figs/02_species_abundance.png")
 ```
 
 
 
+## Discussion
 
-## Discussão
+It is time to synthesize your results and relate your findings with theory. 
 
-Os pinguins são bonitinhos e parecem apresentar diferença entre os sexos. Não aprendemos muito mais sobre os pinguins porque os dados não significam quase nada sem contexto. Esperamos que vocês tenham perdido o medo e se convencido de que é preciso automatizar as partes chatas do manuscrito e focar naquilo que importa: a escrita em si.
+## References
 
-## Referências
-<div id="refs"></div>
+I will cite @zuur_protocol_2010 here <3. 
+
+<div id = "refs"></div>
+
+
+
+

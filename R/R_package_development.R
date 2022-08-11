@@ -1,0 +1,8 @@
+#install.packages("devtools")
+#install.packages("usethis")
+#install.packages("available")
+#install.packages("roxygen2")
+library(devtools)
+library(usethis)
+library(available)
+library(roxygen2)

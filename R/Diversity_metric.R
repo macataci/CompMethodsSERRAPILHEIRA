@@ -60,6 +60,8 @@ comm$AbundantSp <- sp
 #CREATING FUNCTIONS FOR SHANNON AND SIMPSON DIVERSITY IN COMM DATASET
 #Shannon
 
+#pi is data of each specie per site
+
 
 
 ### DIVERSE METRICS PART 2
