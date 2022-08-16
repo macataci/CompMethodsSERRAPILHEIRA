@@ -3,7 +3,7 @@
 library(tidyverse)
 library(reshape2)
 #install.packages("vegan")
-install.packages("FD")
+#install.packages("FD")
 library(vegan)
 
 # Reading the data in R ----
@@ -57,10 +57,68 @@ for (i in 1:nrow(comm[,-1])){
 
 comm$AbundantSp <- sp
 
-#CREATING FUNCTIONS FOR SHANNON AND SIMPSON DIVERSITY IN COMM DATASET
-#Shannon
+#---CREATING FUNCTIONS FOR SHANNON AND SIMPSON DIVERSITY IN COMM DATASET
+#---------------Shannon
 
-#pi is data of each specie per site
+
+ShannonCalc <- function (x){
+  ShannonFila <- c()
+  for (i in 1:nrow(x)){
+    fila <- x[i,]
+    totalFila <- sum(fila)
+    nozero <- fila[fila!=0]
+    multi <- (nozero/totalFila)*log(nozero/totalFila)
+    sumita <- sum(multi)
+    ShannonFila[i] <- -sumita
+  }
+  return(ShannonFila)
+}
+commNum <- comm[,2:57]
+ShannonCalc (commNum)
+comm$H <- ShannonCalc (commNum)
+View(comm)
+#Comprobación
+diversity (commNum, "shannon")
+#Sí dio
+
+#---------------------------Simpson
+SimpsonCalc <- function (x){
+  SimpsonFila <- c()
+  for (i in 1:nrow(x)){
+    fila <- x[i,]
+    totalFila <- sum(fila)
+    prob <- fila/totalFila
+    elevado <- prob^2
+    sumita <- sum(elevado)
+    SimpsonFila[i] <- 1-sumita}
+  return(SimpsonFila)
+}
+
+comm$Simp <- SimpsonCalc (commNum)
+View(comm)
+#Comprobación
+diversity (commNum, "simpson")
+#Sí dio
+
+#-----------------InvSimpson
+InvSimpsonCalc <- function (x){
+  InvSimpsonFila <- c()
+  for (i in 1:nrow(x)){
+    fila <- x[i,]
+    totalFila <- sum(fila)
+    prob <- fila/totalFila
+    elevado <- prob^2
+    sumita <- sum(elevado)
+    InvSimpsonFila[i] <- 1/sumita}
+  return(InvSimpsonFila)
+}
+
+comm$InvSimp <- InvSimpsonCalc (commNum)
+View(comm)
+#Comprobación
+diversity (commNum, "invsimpson")
+#Sí dio
+
 
 
 
