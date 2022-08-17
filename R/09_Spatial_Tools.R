@@ -23,8 +23,7 @@ library(dplyr)
 
 data(World)
 #geometry es lista de multipolygon
-tm_shape(World) +
-  tm_borders()
+tm_shape(World) +  tm_borders()
 
 #head(World)
 names(World)
@@ -64,3 +63,26 @@ World %>%
 
 bra <- ne_states(country = "brazil", returnclass = "sf")
 plot(bra)
+
+dir.create("data/shapefiles", recursive = TRUE)
+st_write(obj = bra, dsn = "data/shapefiles/bra.shp", delete_layer = TRUE)
+
+bra2 <- read_sf("data/shapefiles/bra.shp")
+class(bra)
+class(bra2)
+plot(bra)
+plot(bra2)
+
+dir.create(path = "data/raster/", recursive = TRUE)
+tmax_data <- getData(name = "worldclim", var = "tmax", res = 10, path = "data/raster/")
+plot(tmax_data)
+is(tmax_data) #the data are a raster stack, several rasters piled
+dim(tmax_data)
+extent(tmax_data)
+res(tmax_data)
+
+#---------Choose your own adventure:
+
+#Check the vignettes in sf
+#Check the tutorials in rspatialdata
+#Check the multiple CRAN TaskViews regarding spatial data
